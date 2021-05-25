@@ -96,6 +96,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.env
 
 # Spyder project settings
 .spyderproject
@@ -119,7 +120,9 @@ venv.bak/
 # Rasa stuff
 *.db*
 *.dot
-models/
+models/*
+.config/*
+logs/*
 terms/
 results/
 

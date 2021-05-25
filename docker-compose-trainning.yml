@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  rasa_tranning:
+    restart: always
+    image: "rasa/rasa:${RASA_VERSION}-full"
+    volumes:
+        - ./.config:/.config
+        - ./actions:/app/actions
+        - ./data:/app/data
+        - ./models:/app/models        
+        - ./domain.yml:/app/domain.yml
+        - ./credentials.yml:/app/credentials.yml 
+        - ./endpoints.yml:/app/endpoints.yml
+        - ./config.yml:/app/config.yml
+        - ./logs:/app/logs
+    expose:
+      - "5005"            
+    command: >
+      train
+      --debug 

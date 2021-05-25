@@ -79,3 +79,57 @@ load your bot into the Rasa X instance.
 You will need to have docker installed in order to build the action server image. If you haven't made any changes to the action code, you can also use the [public image on Dockerhub](https://hub.docker.com/repository/docker/mvielkind/insurance_pack) instead of building it yourself.
 
 It is recommended to use an [automated CI/CD process](https://rasa.com/docs/rasa/user-guide/setting-up-ci-cd) to keep your action server up to date in a production environment.
+
+
+## Run Bot server using Docker compose on local machine and connect it with telegram
+
+This repository contains 2 docker-compose files which are going to help you in trainning and inference process.
+
+First make sure you have docker installd on pc, you can download it from the [official website](https://www.docker.com/products/docker-desktop)
+
+
+### Trainning
+
+To train the bot. In the terminal window enter:
+
+```bash
+docker-compose -f docker-compose-trainning.yml up
+```
+
+When trainning finishes you will seee a success message on console, so you can stop containers using with this command:
+
+```bash
+docker-compose down
+```
+
+As result you will have a new tranning model will b available on models folder
+
+### Connecting Telegram
+
+If you are running bot on a local pc please creat an account and install [ngrok](https://ngrok.com/product) on your pc. This tool is going to provied you with a public IP address and https security. 
+After that run on a command line:
+
+```bash
+./ngrok http 5005
+```
+
+On root folder make a copy of the file .env.example and rename it .env 
+
+On .env file edit TELEGRAM_ACCESS_TOKEN, TELEGRAM_VERIFY, you can find how to get this variables using telegram's Bot Father [here ](https://rasa.com/docs/rasa/connectors/telegram/)
+
+Add your engok https url on TELEGRAM_WEBHOOK_URL variable
+
+### Start the bot
+To run the bot just enter in a command line:
+
+```bash
+docker-compose up -d
+```
+
+You can check the og if anything goes wrong on logs folder
+
+Finally you can talk with the bot using telegram, just search bot your bot and start writting. When you want to stop the bot just run.
+
+```bash
+docker-compose down
+```
